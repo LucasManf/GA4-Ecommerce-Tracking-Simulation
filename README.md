@@ -29,6 +29,29 @@ Events are pushed into the **dataLayer** and processed via GTM.
 
 ---
 
+## 🔧 Google Tag Manager Setup
+
+This project uses Google Tag Manager to capture ecommerce events.
+
+Configuration summary:
+
+Tags:
+- GA4 Configuration Tag
+- GA4 Event Tags (view_item, add_to_cart, begin_checkout, purchase)
+
+Triggers:
+- Custom Events based on dataLayer events
+
+Variables:
+- Data Layer Variables for ecommerce parameters
+
+---
+
+### GTM Configuration Example
+
+
+---
+
 ## 🧱 Architecture
 
 Website → dataLayer → Google Tag Manager → Google Analytics 4
