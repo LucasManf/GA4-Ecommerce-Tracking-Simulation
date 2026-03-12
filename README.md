@@ -49,6 +49,11 @@ Variables:
 
 ### GTM Configuration Example
 
+### Tags
+![Product Page](assets/tags.png)
+
+### Triggers
+![Product Page](assets/triggers.png)
 
 ---
 
@@ -81,7 +86,11 @@ Website → dataLayer → Google Tag Manager → Google Analytics 4
 
 ## 📸 Demo Preview
 
+### Home Page
+![Home Page](assets/image.png)
 
+### Product Page
+![Product Page](assets/image2.png)
 
 ---
 
