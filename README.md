@@ -3,7 +3,7 @@
 A frontend demo project that simulates an ecommerce funnel and demonstrates how tracking events are implemented using Google Tag Manager (GTM) and Google Analytics 4 (GA4).
 
 🔗 **Live Demo:**  
-https://ga4-ecommerce-tracking-simulation.vercel.app
+[https://ga4-ecommerce-tracking-simulation.vercel.app](https://ecommerce-tracking-simulation.vercel.app/)
 
 ---
 
