@@ -87,6 +87,11 @@ Website → dataLayer → Google Tag Manager → Google Analytics 4
 
 ---
 
+Events validated using:
+- GTM Preview Mode
+
+---
+
 ## 📸 Demo Preview
 
 ### Home Page
