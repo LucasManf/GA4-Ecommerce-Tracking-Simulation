@@ -50,10 +50,13 @@ Variables:
 ### GTM Configuration Example
 
 ### Tags
-![Product Page](assets/tags.png)
+![Tags](assets/tags.png)
 
 ### Triggers
-![Product Page](assets/triggers.png)
+![Triggers](assets/triggers.png)
+
+### Variables
+![Variables](assets/variables.png)
 
 ---
 
