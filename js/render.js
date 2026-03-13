@@ -57,3 +57,16 @@ Add to Cart
 }
 
 document.addEventListener("DOMContentLoaded", renderProductPage);
+
+const container = document.getElementById("product-list");
+
+
+function viewCollection() {
+
+    dataLayer.push({
+        event: "view_collection",
+        collection: "summer"
+    });
+
+}
+

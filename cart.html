@@ -32,28 +32,74 @@
     <!-- End Google Tag Manager (noscript) -->
 
     <header>
-        <h1>Your Cart</h1>
+        <nav class="navbar">
+            <a href="index.html"><div class="logo">SportShop</div></a>
+            <ul class="navigation">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="all_products.html">Shop</a></li>
+                <li><a href="cart.html">Cart</a></li>
+            </ul>
+        </nav>
     </header>
 
+
     <div class="container">
-
-        <div class="product-card">
-
-            <p>Running Shoes</p>
-
-            <p class="price">$120</p>
-
-            <a href="checkout.html">
-                <button>Proceed to Checkout</button>
-            </a>
-
+        <!-- Contenedor principal del carrito -->
+        <div id="cart-items">
+            <!-- Aquí se van a insertar los product-card del carrito -->
         </div>
 
+        <!-- Botón Proceed to Checkout -->
+        <a href="checkout.html">
+            <button>Proceed to Checkout</button>
+        </a>
     </div>
+
     <div id="debug-panel">
         <button onclick="clearDebug()">Clear Debug</button>
         <div id="debug-events"></div>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+    const container = document.getElementById("cart-items");
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    function renderCart() {
+        container.innerHTML = ""; // limpiar antes de renderizar
+
+        if (cart.length === 0) {
+            container.innerHTML = "<p>Your cart is empty</p>";
+            return;
+        }
+
+        cart.forEach((product, index) => {
+            const card = document.createElement("div");
+            card.className = "product-card";
+            card.innerHTML = `
+                <img src="${product.image}" alt="${product.name}" />
+                <p>${product.name}</p>
+                <p class="price">$${product.price}</p>
+                <button class="remove-btn" data-index="${index}">Remove</button>
+            `;
+            container.appendChild(card);
+        });
+
+        // Agregar evento a los botones de eliminar
+        const removeButtons = container.querySelectorAll(".remove-btn");
+        removeButtons.forEach(btn => {
+            btn.addEventListener("click", function() {
+                const idx = parseInt(this.dataset.index);
+                cart.splice(idx, 1); // eliminar producto del array
+                localStorage.setItem("cart", JSON.stringify(cart)); // actualizar localStorage
+                renderCart(); // re-renderizar carrito
+            });
+        });
+    }
+
+    renderCart(); // render inicial
+});
+    </script>
 </body>
 
 </html>

@@ -159,9 +159,11 @@ function viewProduct(product) {
 }
 
 function addToCart(productId) {
-
+    // Buscar producto por ID
     const product = products.find(p => p.id === productId);
+    if (!product) return;
 
+    // Guardar en dataLayer para tracking
     dataLayer.push({
         event: "add_to_cart",
         ecommerce: {
@@ -176,5 +178,11 @@ function addToCart(productId) {
         }
     });
 
+    // Guardar en localStorage
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.push(product);  // agregamos el producto
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    // Redirigir al carrito
     window.location.href = "cart.html";
 }
