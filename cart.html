@@ -66,7 +66,7 @@
     let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
     function renderCart() {
-        container.innerHTML = ""; // limpiar antes de renderizar
+        container.innerHTML = "";
 
         if (cart.length === 0) {
             container.innerHTML = "<p>Your cart is empty</p>";
@@ -85,14 +85,14 @@
             container.appendChild(card);
         });
 
-        // Agregar evento a los botones de eliminar
+
         const removeButtons = container.querySelectorAll(".remove-btn");
         removeButtons.forEach(btn => {
             btn.addEventListener("click", function() {
                 const idx = parseInt(this.dataset.index);
-                cart.splice(idx, 1); // eliminar producto del array
-                localStorage.setItem("cart", JSON.stringify(cart)); // actualizar localStorage
-                renderCart(); // re-renderizar carrito
+                cart.splice(idx, 1);
+                localStorage.setItem("cart", JSON.stringify(cart));
+                renderCart();
             });
         });
     }

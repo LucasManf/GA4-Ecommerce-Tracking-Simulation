@@ -199,8 +199,8 @@ body {
 #cart-items .product-card img {
     width: 200px;
     height: 200px;
-    object-fit: cover; /* para mantener proporción y recortar si hace falta */
-    border-radius: 5px; /* opcional, si querés esquinas redondeadas */
+    object-fit: cover; 
+    border-radius: 5px;
 }
 
 /* PRODUCTS */
@@ -217,10 +217,10 @@ body {
 
 #product-detail img {
     width: 500px;
-    height: 500px;
-    object-fit: cover; /* mantiene proporción y recorta si hace falta */
+    height: 300px;
+    object-fit: cover;
     display: block;
-    margin-bottom: 15px; /* opcional, separa del título */
+    margin-bottom: 15px;
 }
 
 /* CARD */
