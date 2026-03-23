@@ -7,7 +7,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (document.getElementById("product-detail")) {
         renderProductPage();
     }
-
+    
+    if (document.getElementById("checkout-summary")) {
+        renderCheckout();
+    }
 });
 
 function renderProducts() {
@@ -68,13 +71,33 @@ Add to Cart
 
 const container = document.getElementById("product-list");
 
+function renderCheckout() {
 
-function viewCollection() {
+    const container = document.getElementById("checkout-summary");
+    if (!container) return;
 
-    dataLayer.push({
-        event: "view_collection",
-        collection: "summer"
+    const cart = getCart();
+
+    if (cart.length === 0) {
+        container.innerHTML = "<p>Your cart is empty</p>";
+        return;
+    }
+
+    let html = "<h2>Order Summary</h2>";
+
+    cart.forEach(product => {
+        html += `
+            <div class="checkout-item">
+                <span>${product.name}</span>
+                <span>$${product.price}</span>
+            </div>
+        `;
     });
 
-}
+    html += `
+        <hr>
+        <h3>Total: $${getCartTotal()}</h3>
+    `;
 
+    container.innerHTML = html;
+}

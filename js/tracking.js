@@ -50,6 +50,7 @@ function purchase() {
 
     // limpiar carrito después de comprar
     localStorage.removeItem("cart");
+    window.location.href = "purchase.html";
 }
 
 function getCart() {
