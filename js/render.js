@@ -1,3 +1,15 @@
+document.addEventListener("DOMContentLoaded", () => {
+
+    if (document.getElementById("product-list")) {
+        renderProducts();
+    }
+
+    if (document.getElementById("product-detail")) {
+        renderProductPage();
+    }
+
+});
+
 function renderProducts() {
 
     const container = document.getElementById("product-list");
@@ -26,8 +38,6 @@ function goToProduct(id) {
     window.location.href = `product.html?id=${id}`;
 }
 
-document.addEventListener("DOMContentLoaded", renderProducts);
-
 function getProductFromURL() {
 
     const params = new URLSearchParams(window.location.search);
@@ -55,8 +65,6 @@ Add to Cart
     viewProduct(product);
 
 }
-
-document.addEventListener("DOMContentLoaded", renderProductPage);
 
 const container = document.getElementById("product-list");
 

@@ -13,47 +13,6 @@ dataLayer.push = function () {
 
 };
 
-function viewProduct() {
-
-    dataLayer.push({
-        event: "view_item",
-        ecommerce: {
-            currency: "USD",
-            value: 120,
-            items: [{
-                item_id: "shoe_01",
-                item_name: "Running Shoes",
-                price: 120,
-                item_category: "Shoes",
-                quantity: 1
-            }]
-        }
-    })
-
-}
-
-function addToCart() {
-
-    dataLayer.push({ ecommerce: null });
-
-    dataLayer.push({
-        event: "add_to_cart",
-        ecommerce: {
-            currency: "USD",
-            value: 120,
-            items: [{
-                item_id: "shoe_01",
-                item_name: "Running Shoes",
-                price: 120,
-                quantity: 1
-            }]
-        }
-    })
-
-    window.location.href = "cart.html"
-
-}
-
 function beginCheckout() {
 
     dataLayer.push({ ecommerce: null });
@@ -62,37 +21,51 @@ function beginCheckout() {
         event: "begin_checkout",
         ecommerce: {
             currency: "USD",
-            value: 120
+            value: getCartTotal()
         }
-    })
+    });
 
-    window.location.href = "purchase.html"
-
+    window.location.href = "checkout.html";
 }
 
 function purchase() {
+
+    const items = getCartItemsForGA4();
+    const total = getCartTotal();
 
     dataLayer.push({ ecommerce: null });
 
     dataLayer.push({
         event: "purchase",
         ecommerce: {
-            transaction_id: "ORDER123",
+            transaction_id: generateTransactionId(),
             affiliation: "SportShop Online",
-            value: 120,
-            tax: 10,
+            value: total,
+            tax: total * 0.1,
             shipping: 5,
             currency: "USD",
-            items: [{
-                item_id: "shoe_01",
-                item_name: "Running Shoes",
-                price: 120,
-                item_category: "Shoes",
-                quantity: 1
-            }]
+            items: items
         }
     });
 
+    // limpiar carrito después de comprar
+    localStorage.removeItem("cart");
+}
+
+function getCart() {
+    return JSON.parse(localStorage.getItem("cart")) || [];
+}
+
+function getCartItemsForGA4() {
+
+    const cart = getCart();
+
+    return cart.map(product => ({
+        item_id: product.id,
+        item_name: product.name,
+        price: Number(product.price),
+        quantity: 1
+    }));
 }
 
 function debugEvent(eventName) {
@@ -143,6 +116,8 @@ function clearDebug() {
 
 function viewProduct(product) {
 
+    dataLayer.push({ ecommerce: null });
+
     dataLayer.push({
         event: "view_item",
         ecommerce: {
@@ -155,7 +130,6 @@ function viewProduct(product) {
             }]
         }
     });
-
 }
 
 function addToCart(productId) {
@@ -185,4 +159,16 @@ function addToCart(productId) {
 
     // Redirigir al carrito
     window.location.href = "cart.html";
+}
+
+function getCartTotal() {
+
+    return getCart().reduce(
+        (total, product) => total + Number(product.price),
+        0
+    );
+}
+
+function generateTransactionId() {
+    return "ORDER-" + Date.now();
 }
