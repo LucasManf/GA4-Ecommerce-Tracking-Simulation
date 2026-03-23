@@ -33,7 +33,9 @@
 
     <header>
         <nav class="navbar">
-            <a href="index.html"><div class="logo">SportShop</div></a>
+            <a href="index.html">
+                <div class="logo">SportShop</div>
+            </a>
             <ul class="navigation">
                 <li><a href="index.html">Home</a></li>
                 <li><a href="all_products.html">Shop</a></li>
@@ -61,44 +63,44 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-    const container = document.getElementById("cart-items");
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        document.addEventListener("DOMContentLoaded", function () {
+            const container = document.getElementById("cart-items");
+            let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    function renderCart() {
-        container.innerHTML = "";
+            function renderCart() {
+                container.innerHTML = "";
 
-        if (cart.length === 0) {
-            container.innerHTML = "<p>Your cart is empty</p>";
-            return;
-        }
+                if (cart.length === 0) {
+                    container.innerHTML = "<p>Your cart is empty</p>";
+                    return;
+                }
 
-        cart.forEach((product, index) => {
-            const card = document.createElement("div");
-            card.className = "product-card";
-            card.innerHTML = `
+                cart.forEach((product, index) => {
+                    const card = document.createElement("div");
+                    card.className = "product-card";
+                    card.innerHTML = `
                 <img src="${product.image}" alt="${product.name}" />
                 <p>${product.name}</p>
                 <p class="price">$${product.price}</p>
                 <button class="remove-btn" data-index="${index}">Remove</button>
             `;
-            container.appendChild(card);
+                    container.appendChild(card);
+                });
+
+
+                const removeButtons = container.querySelectorAll(".remove-btn");
+                removeButtons.forEach(btn => {
+                    btn.addEventListener("click", function () {
+                        const idx = parseInt(this.dataset.index);
+                        cart.splice(idx, 1);
+                        localStorage.setItem("cart", JSON.stringify(cart));
+                        renderCart();
+                    });
+                });
+            }
+
+            renderCart(); // render inicial
         });
-
-
-        const removeButtons = container.querySelectorAll(".remove-btn");
-        removeButtons.forEach(btn => {
-            btn.addEventListener("click", function() {
-                const idx = parseInt(this.dataset.index);
-                cart.splice(idx, 1);
-                localStorage.setItem("cart", JSON.stringify(cart));
-                renderCart();
-            });
-        });
-    }
-
-    renderCart(); // render inicial
-});
     </script>
 </body>
 
